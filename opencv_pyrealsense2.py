@@ -77,11 +77,11 @@ try:
         print("Sum left", left_detect)
         print("Sum_right", right_detect)
 
-        if(left_detect > 0.1):
+        if((left_detect > 0.1) and (left_detect > right_detect)):
             #TURN RIGHT LOGIC
             cv.arrowedLine(np_image, (int(width*2/3), int(height/2)), (int(width*5/6), int(height/2)), (255,255,255), 9)
 
-        elif(right_detect > 0.1):
+        elif((right_detect > 0.1) and (right_detect > left_detect)):
             #TURN LEFT LOGIC
             cv.arrowedLine(np_image, (int(width/3), int(height/2)), (int(width/6), int(height/2)), (255,255,255), 9)
 

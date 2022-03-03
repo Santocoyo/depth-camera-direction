@@ -1,7 +1,15 @@
 import pyrealsense2 as rs
+import Jetson.GPIO as GPIO
 import cv2 as cv
 import numpy as np
 
+# Setup GPIO pins
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(18, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(16, GPIO.OUT)
+
+# Setting Intel Realsense D435i
 pipeline = rs.pipeline()
 config = rs.config()
 
@@ -79,14 +87,23 @@ try:
 
         if((left_detect > 0.1) and (left_detect > right_detect)):
             #TURN RIGHT LOGIC
+            GPIO.output(18, GPIO.HIGH)
+            GPIO.output(12, GPIO.LOW)
+            GPIO.output(16, GPIO.LOW)
             cv.arrowedLine(np_image, (int(width*2/3), int(height/2)), (int(width*5/6), int(height/2)), (255,255,255), 9)
 
         elif((right_detect > 0.1) and (right_detect > left_detect)):
             #TURN LEFT LOGIC
+            GPIO.output(18, GPIO.LOW)
+            GPIO.output(12, GPIO.HIGH)
+            GPIO.output(16, GPIO.LOW)
             cv.arrowedLine(np_image, (int(width/3), int(height/2)), (int(width/6), int(height/2)), (255,255,255), 9)
 
         else:
             #FRONT LOGIC
+            GPIO.output(18, GPIO.LOW)
+            GPIO.output(12, GPIO.LOW)
+            GPIO.output(16, GPIO.HIGH)
             cv.arrowedLine(np_image, (int(width/2), int(height/2)), (int(width/2), int(height/6)), (255,255,255), 9)
 
 
@@ -98,7 +115,7 @@ try:
 
         cv.namedWindow("RealSense", cv.WINDOW_AUTOSIZE)
         cv.imshow("Depth Image", np_image)
-        cv.imshow("Threshold Image", thresh_image)
+        #cv.imshow("Threshold Image", thresh_image)
         #cv.imshow("Left", img_left)
         #cv.imshow("Right", img_right)
         key = cv.waitKey(1)

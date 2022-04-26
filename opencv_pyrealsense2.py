@@ -92,7 +92,7 @@ try:
             GPIO.output(16, GPIO.LOW)
             cv.arrowedLine(np_image, (int(width*2/3), int(height/2)), (int(width*5/6), int(height/2)), (255,255,255), 9)
 
-        elif((right_detect ) and (right_detect > left_detect)):
+        elif((right_detect > 0.04) and (right_detect > left_detect)):
             #TURN LEFT LOGIC
             GPIO.output(18, GPIO.LOW)
             GPIO.output(12, GPIO.HIGH)

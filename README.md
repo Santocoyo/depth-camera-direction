@@ -107,7 +107,7 @@ Con la cámara desconectada se empezará a configurar las librerías, paquetes y
 
 Para habilitar con Python el uso de los pines digitales de salida de la Jetson Nano, también llamados GPIO, son necesarias unas configuraciones.
 
-1. Instalar las librarías de `Jetson.GPIO`.
+1. Instalar las librerías de `Jetson.GPIO`.
 
     ```
     sudo pip install Jetson.GPIO
@@ -216,7 +216,7 @@ Para que el programa principal se ejecute con tan solo encender la Jetson Nano e
     WantedBy=multi-user.target
     ```
     
-5. Correr los siguiente comando en la terminal para habiliar e iniciar el servicio.
+5. Correr los siguiente comando en la terminal para habilitar e iniciar el servicio.
 
     ```
     sudo systemctl enable mything.service
